@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>La mejor mentira</title>
+<script src="/socket.io/socket.io.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{--bg:#0c0d12;--panel:#151720;--panel2:#1d202b;--line:#2b2f3d;--text:#f6f4f0;--muted:#9da2b3;--red:#ff5268;--blue:#55a9ff;--gold:#f7c96b;--green:#69d6a3}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -20%,#242338 0,#0c0d12 55%);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:13px;padding:13px 18px;font-weight:800;background:#f3f0e9;color:#171821;transition:.15s}button:hover{transform:translateY(-1px);filter:brightness(1.06)}button:disabled{opacity:.4;cursor:not-allowed;transform:none}.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}.danger{background:var(--red);color:#21090e}.blue{background:var(--blue);color:#071321}.wrap{width:min(920px,calc(100% - 32px));margin:auto;padding:26px 0 60px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px}.brand{font-family:'Space Grotesk';font-weight:700;letter-spacing:-1px;font-size:19px}.brand span{color:var(--gold)}.pill{border:1px solid var(--line);color:var(--muted);border-radius:99px;padding:7px 11px;font-size:12px}.screen{display:none}.screen.active{display:block}.hero{text-align:center;padding:40px 0 24px}.eyebrow{color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:11px}.hero h1{font:700 clamp(42px,8vw,76px)/.98 'Space Grotesk';letter-spacing:-4px;margin:15px 0}.hero h1 em{font-style:normal;color:var(--red)}.hero p{color:var(--muted);max-width:480px;margin:16px auto 0;line-height:1.65}.panel{background:linear-gradient(145deg,#191c27,#13151d);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 18px 50px #0003}.homegrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:620px;margin:26px auto}.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}.field label{font-size:12px;color:var(--muted);font-weight:700}.field input,.field select,.field textarea{width:100%;background:#0e1017;border:1px solid var(--line);border-radius:12px;color:var(--text);padding:13px;outline:none}.field input:focus,.field textarea:focus{border-color:var(--gold)}.field textarea{min-height:85px;resize:vertical}.full{width:100%}.row{display:flex;gap:12px;align-items:center}.between{justify-content:space-between}.muted{color:var(--muted)}.small{font-size:12px}.title{font:700 28px 'Space Grotesk';margin:0 0 8px}.code{font:700 32px 'Space Grotesk';letter-spacing:7px;color:var(--gold)}.players{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}.player{padding:13px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:8px}.dot{width:9px;height:9px;border-radius:50%;background:var(--green);display:inline-block;margin-right:7px}.dot.off{background:#646979}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}.question{font:700 clamp(22px,4vw,34px)/1.2 'Space Grotesk';margin:16px 0 22px}.role{display:inline-flex;padding:8px 12px;border-radius:99px;font-weight:800;font-size:12px}.role.red{background:#51212b;color:#ff8795}.role.blue{background:#173755;color:#82c4ff}.role.reader{background:#493b1b;color:#ffdb8c}.answerlist{display:grid;gap:10px}.answer{padding:16px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;line-height:1.5}.answer.pick{cursor:pointer}.answer.pick.selected{border:2px solid var(--gold);background:#28251d}.answer strong{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}.timer{font:700 24px 'Space Grotesk';color:var(--gold)}.bar{height:7px;background:#292c38;border-radius:99px;overflow:hidden;margin-top:10px}.bar>i{display:block;height:100%;background:var(--gold);width:100%;transition:width 1s linear}.notice{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#f3f0e9;color:#171821;padding:12px 18px;border-radius:12px;box-shadow:0 8px 30px #0008;display:none;z-index:5;font-weight:700;max-width:90%;text-align:center}.scores{display:grid;gap:8px}.score{display:flex;justify-content:space-between;padding:12px;background:var(--panel2);border-radius:12px}.tag{font-size:11px;border-radius:99px;padding:4px 8px;background:#282b36;color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.actions button{flex:1;min-width:145px}.hint{background:#1e2029;border-radius:12px;padding:13px;color:var(--muted);font-size:13px;line-height:1.5;margin:14px 0}.hidden{display:none!important}
+@media(max-width:600px){.wrap{width:min(100% - 22px,920px);padding-top:16px}.panel{padding:18px}.homegrid{grid-template-columns:1fr}.hero{padding-top:24px}.hero h1{letter-spacing:-2px}.top{margin-bottom:20px}.sectionhead{align-items:flex-start;flex-direction:column}.actions button{min-width:100%}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="top"><div class="brand">LA MEJOR <span>MENTIRA.</span></div><div class="pill" id="connection">● Conectando...</div></header>
+<section id="home" class="screen active">
+ <div class="hero"><div class="eyebrow">Un juego de verdades y engaños</div><h1>¿Quién está<br><em>mintiendo?</em></h1><p>Algunos dicen la verdad. Otros inventan la mejor mentira. Escuchá, desconfiá y descubrí quién te está engañando.</p></div>
+ <div class="panel" style="max-width:620px;margin:auto">
+  <div class="field"><label>¿CÓMO TE LLAMÁS?</label><input id="nickname" maxlength="24" placeholder="Tu apodo" autocomplete="nickname"></div>
+  <div class="homegrid" style="margin:16px 0 0">
+   <button class="full" id="create">＋ Crear una sala</button>
+   <div><div class="field" style="margin:0"><label>CÓDIGO DE SALA</label><input id="roomcode" maxlength="6" placeholder="ABC123" style="text-transform:uppercase;text-align:center;letter-spacing:3px"></div><button class="secondary full" id="join" style="margin-top:9px">Unirme a una sala</button></div>
+  </div>
+  <p class="muted small" style="text-align:center;margin:20px 0 0">Mínimo 3 personas · Cada uno juega desde su dispositivo</p>
+ </div>
+</section>
+<section id="lobby" class="screen">
+ <div class="panel">
+  <div class="sectionhead"><div><div class="eyebrow">Sala de espera</div><h2 class="title">Invitá a tus amigos</h2></div><span class="pill">CÓDIGO</span></div>
+  <div class="code" id="codeDisplay">------</div><div class="row" style="margin:12px 0 22px"><button class="secondary" id="copy">Copiar invitación</button><span class="muted small" id="inviteStatus">Compartí el código o el link</span></div>
+  <div class="sectionhead"><h3 class="title" style="font-size:18px">Jugadores <span class="muted" id="playerCount"></span></h3><span class="tag">Personas reales</span></div>
+  <div class="players" id="lobbyPlayers"></div>
+  <div id="hostSettings">
+   <div class="row">
+    <div class="field" style="flex:1"><label>MÁXIMO DE JUGADORES</label><select id="maxPlayers"><option>3</option><option>4</option><option selected>6</option><option>8</option><option>10</option></select></div>
+    <div class="field" style="flex:1"><label>ROJOS POR RONDA</label><select id="redCount"><option value="1">1 mentiroso</option><option value="2">2 mentirosos</option><option value="3">3 mentirosos</option></select></div>
+   </div>
+   <div class="field"><label>TIEMPO PARA RESPONDER</label><select id="answerSeconds"><option value="30">30 segundos</option><option value="60" selected>60 segundos</option><option value="90">90 segundos</option><option value="120">2 minutos</option></select></div>
+   <button class="full" id="start">Empezar partida</button>
+  </div>
+  <div id="guestWait" class="hint hidden">Esperando a que quien creó la sala inicie la partida…</div>
+  <p class="muted small">Para empezar necesitan al menos 3 jugadores conectados.</p>
+ </div>
+</section>
+<section id="game" class="screen">
+ <div class="panel">
+  <div class="sectionhead"><div><div class="eyebrow" id="roundLabel">Ronda 1</div><h2 class="title" id="phaseTitle">Tu papel</h2></div><span class="role" id="roleBadge">ROL</span></div>
+  <div class="question" id="question"></div>
+  <div id="answerPhase" class="hidden">
+   <div id="readerInfo" class="hint hidden">Esta ronda sos quien lee. No respondas: esperá las respuestas de los demás y después elegí a quiénes acusar.</div>
+   <div id="answerForm" class="hidden"><div class="field"><label>TU RESPUESTA</label><textarea id="answerText" maxlength="220" placeholder="Escribí tu respuesta..."></textarea></div><button class="full" id="sendAnswer">Enviar respuesta</button></div>
+   <div id="answerWait" class="hint hidden">Respuesta enviada. Esperá a los demás jugadores…</div>
+   <div id="answerProgress" class="muted small"></div>
+  </div>
+  <div id="selectPhase" class="hidden">
+   <p class="muted">Tocá los nombres que creés que están mintiendo. Podés elegir más de uno.</p>
+   <div id="selectAnswers" class="answerlist"></div>
+   <div class="actions"><button id="finishSelect">Confirmar acusaciones</button></div>
+   <div id="notReader" class="hint hidden">El lector está revisando las respuestas y eligiendo a quién acusar…</div>
+  </div>
+  <div id="revealPhase" class="hidden">
+   <div id="resultText" class="hint"></div>
+   <div id="roleReveal" class="answerlist"></div>
+   <h3 style="margin-top:24px">Puntajes</h3><div id="scoreboard" class="scores"></div>
+   <div class="actions"><button id="nextRound">Siguiente ronda</button><button class="secondary" id="backLobby">Volver a la sala</button></div>
+   <p id="hostNextHint" class="muted small hidden">Esperando a que quien creó la sala avance…</p>
+  </div>
+ </div>
+</section>
+</main><div class="notice" id="notice"></div>
+<script>
+const socket = io();
+let myId=null, roomCode=null, room=null, myRole=null, timer=null, selected=new Set(), lastPhase="";
+const $=id=>document.getElementById(id);
+function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(id).classList.add("active")}
+function notify(t){$("notice").textContent=t;$("notice").style.display="block";clearTimeout(notify.t);notify.t=setTimeout(()=>$("notice").style.display="none",3000)}
+function name(){return $("nickname").value.trim()}
+function playerName(id){return room?.players.find(p=>p.id===id)?.name||"Jugador"}
+function isHost(){return room?.hostId===myId}
+socket.on("connect",()=>{$("connection").textContent="● Conectado";$("connection").style.color="var(--green)"});
+socket.on("disconnect",()=>{$("connection").textContent="● Reconectando…";$("connection").style.color="var(--red)"});
+socket.on("notice",notify);
+socket.on("room:joined",d=>{roomCode=d.code;myId=d.playerId;$("codeDisplay").textContent=roomCode;show("lobby")});
+socket.on("role",d=>{myRole=d.role;notify(d.role==="reader"?"Esta ronda sos quien lee":d.role==="red"?"Sos ROJO: tenés que mentir":"Sos AZUL: decí la verdad")});
+socket.on("room:update",r=>{
+ room=r;roomCode=r.code;$("codeDisplay").textContent=r.code;$("playerCount").textContent="("+r.players.length+"/"+r.settings.maxPlayers+")";
+ $("lobbyPlayers").innerHTML=r.players.map(p=>'<div class="player"><span><i class="dot '+(p.connected?"":"off")+'"></i>'+esc(p.name)+(p.id===r.hostId?' <span class="tag">HOST</span>':'')+'</span><span class="muted small">'+(p.connected?"●":"○")+'</span></div>').join("");
+ $("hostSettings").classList.toggle("hidden",!isHost());$("guestWait").classList.toggle("hidden",isHost());
+ if(isHost()){$("maxPlayers").value=r.settings.maxPlayers;$("redCount").value=r.settings.redCount;$("answerSeconds").value=r.settings.answerSeconds}
+ if(r.phase==="lobby"){show("lobby");return}
+ show("game");$("roundLabel").textContent="RONDA "+r.round;$("question").textContent=r.question;
+ ["answerPhase","selectPhase","revealPhase"].forEach(x=>$(x).classList.add("hidden"));
+ if(r.phase==="answer"){
+  $("answerPhase").classList.remove("hidden");$("phaseTitle").textContent="Respondé";$("roleBadge").textContent=myRole==="reader"?"LECTOR":myRole==="red"?"ROJO · MENTÍS":"AZUL · VERDAD";$("roleBadge").className="role "+(myRole||"reader");
+  const reader=myId===r.readerId;$("readerInfo").classList.toggle("hidden",!reader);
+  $("answerForm").classList.toggle("hidden",reader||!!r.players.find(p=>p.id===myId)?.submitted);
+  $("answerWait").classList.toggle("hidden",reader||!r.players.find(p=>p.id===myId)?.submitted);
+  $("answerProgress").textContent=(r.players.filter(p=>p.id!==r.readerId&&p.submitted).length)+" de "+(r.players.length-1)+" respuestas recibidas";
+ }
+ if(r.phase==="select"){
+  $("selectPhase").classList.remove("hidden");$("phaseTitle").textContent="¿Quién miente?";$("roleBadge").textContent="ACUSACIÓN";$("roleBadge").className="role reader";
+  const reader=myId===r.readerId;$("notReader").classList.toggle("hidden",reader);
+  $("selectAnswers").innerHTML=r.answers.map(a=>'<div class="answer pick '+(selected.has(a.id)?"selected":"")+'" data-id="'+a.id+'"><strong>'+esc(a.name)+'</strong>'+esc(a.text)+(selected.has(a.id)?" ✓":"")+'</div>').join("");
+  document.querySelectorAll(".answer.pick").forEach(el=>el.onclick=()=>{if(!reader)return;const id=el.dataset.id;selected.has(id)?selected.delete(id):selected.add(id);el.classList.toggle("selected",selected.has(id))});
+  $("finishSelect").classList.toggle("hidden",!reader);
+ }
+ if(r.phase==="reveal"){
+  $("revealPhase").classList.remove("hidden");$("phaseTitle").textContent="La verdad sale a la luz";$("roleBadge").textContent="REVELACIÓN";$("roleBadge").className="role reader";
+  const res=r.result;const caught=res.caught.length, reds=res.reds.length;
+  $("resultText").textContent="Se descubrieron "+caught+" de "+reds+" mentiroso(s). "+(res.innocent.length?"Se acusó injustamente a "+res.innocent.length+" jugador(es).":"¡No hubo acusaciones equivocadas!");
+  $("roleReveal").innerHTML=res.roles.map(p=>'<div class="answer"><strong>'+esc(p.name)+'</strong><span class="role '+p.role+'">'+(p.role==="red"?"ROJO · MENTÍA":p.role==="blue"?"AZUL · DECÍA LA VERDAD":"LECTOR")+'</span></div>').join("");
+  $("scoreboard").innerHTML=[...r.players].sort((a,b)=>b.score-a.score).map((p,i)=>'<div class="score"><span>'+(i+1)+'. '+esc(p.name)+'</span><b>'+p.score+' pts</b></div>').join("");
+  $("nextRound").classList.toggle("hidden",!isHost());$("backLobby").classList.toggle("hidden",!isHost());$("hostNextHint").classList.toggle("hidden",isHost());
+ }
+});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+$("create").onclick=()=>{if(!name())return notify("Primero escribí tu nombre.");socket.emit("room:create",{name:name(),settings:{maxPlayers:6,redCount:1,answerSeconds:60}})};
+$("join").onclick=()=>{if(!name())return notify("Primero escribí tu nombre.");socket.emit("room:join",{name:name(),code:$("roomcode").value.trim().toUpperCase()})};
+$("roomcode").oninput=e=>e.target.value=e.target.value.toUpperCase().replace(/[^A-Z0-9]/g,"").slice(0,6);
+$("copy").onclick=async()=>{const url=location.origin+location.pathname+"?sala="+roomCode;try{await navigator.clipboard.writeText("¡Jugá La mejor mentira conmigo! Entrá a "+url+" y usá el código "+roomCode);notify("Invitación copiada")}catch{notify("Código de sala: "+roomCode)}};
+const params=new URLSearchParams(location.search);if(params.get("sala"))$("roomcode").value=params.get("sala").toUpperCase();
+["maxPlayers","redCount","answerSeconds"].forEach(id=>$(id).onchange=()=>socket.emit("room:settings",{maxPlayers:+$("maxPlayers").value,redCount:+$("redCount").value,answerSeconds:+$("answerSeconds").value}));
+$("start").onclick=()=>socket.emit("game:start");
+$("sendAnswer").onclick=()=>{socket.emit("answer:submit",$("answerText").value);$("answerText").value=""};
+$("finishSelect").onclick=()=>{socket.emit("selection:finish");selected.clear()};
+$("nextRound").onclick=()=>socket.emit("game:next");
+$("backLobby").onclick=()=>socket.emit("game:reset");
+</script></body></html>
